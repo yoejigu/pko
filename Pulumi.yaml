@@ -1,5 +1,5 @@
 name: pko
-description: A minimal TypeScript Pulumi program that deploys a DB today
+description: A minimal TypeScript Pulumi program that deploys a DB today please
 runtime:
   name: nodejs
   options:
