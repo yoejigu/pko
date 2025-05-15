@@ -13,7 +13,7 @@ const dbName = "my_app_db";
 const newDb = "client_connection_db"
 
 
-// 🔧 Create a custom VPC
+//  Create a custom VPC
 const vpc = new aws.ec2.Vpc("custom-vpc", {
     cidrBlock: "10.0.0.0/16",
     enableDnsSupport: true,
@@ -21,18 +21,18 @@ const vpc = new aws.ec2.Vpc("custom-vpc", {
     tags: { Name: "custom-vpc" },
   });
   
-  // 📡 Create an Internet Gateway
+  //  Create an Internet Gateway
   const igw = new aws.ec2.InternetGateway("vpc-igw", {
     vpcId: vpc.id,
   });
   
-  // 🛣️ Route Table and association
+  //  Route Table and association
   const routeTable = new aws.ec2.RouteTable("vpc-rt", {
     vpcId: vpc.id,
     routes: [{ cidrBlock: "0.0.0.0/0", gatewayId: igw.id }],
   });
   
-  // 🌐 Create 2 public subnets in different AZs
+  //  Create 2 public subnets in different AZs
   const subnet1 = new aws.ec2.Subnet("subnet-1", {
     vpcId: vpc.id,
     cidrBlock: "10.0.1.0/24",
@@ -59,7 +59,7 @@ const vpc = new aws.ec2.Vpc("custom-vpc", {
     routeTableId: routeTable.id,
   });
   
-  // 🔐 Security Group for RDS
+  //  Security Group for RDS
   const dbSg = new aws.ec2.SecurityGroup("db-sg", {
     vpcId: vpc.id,
     description: "Allow Postgres",
@@ -77,14 +77,14 @@ const vpc = new aws.ec2.Vpc("custom-vpc", {
     }],
   });
   
-  // 🧱 Subnet group for RDS
+  //  Subnet group for RDS
   const dbSubnetGroup = new aws.rds.SubnetGroup("rds-subnet-group", {
     subnetIds: [subnet1.id, subnet2.id],
     tags: { Name: "rds-subnet-group" },
   });
   
 
-// 📦 RDS Instance
+//  RDS Instance
 const db = new aws.rds.Instance("my-db", {
     engine: "postgres",
     engineVersion: "17.2",
@@ -99,7 +99,7 @@ const db = new aws.rds.Instance("my-db", {
     publiclyAccessible: true,
   });
   
-  // 🔐 Store credentials in Secrets Manager
+  //  Store credentials in Secrets Manager
   const secret = new aws.secretsmanager.Secret("db-creds");
   const secretVersion = new aws.secretsmanager.SecretVersion("db-creds-version", {
     secretId: secret.id,
@@ -116,7 +116,7 @@ const db = new aws.rds.Instance("my-db", {
       ),
   });
   
-  //🧠 Connect to RDS and initialize schema
+  // Connect to RDS and initialize schema
   /*const provision = pulumi
     .all([db.address, db.port, dbPassword])
     .apply(async ([address, port, password]) => {
@@ -142,7 +142,7 @@ const db = new aws.rds.Instance("my-db", {
       return pulumi.secret(`Logical DB '${newDb}' created at ${address}`);
     });
   */
-  // 🔎 Exports
+  //  Exports
   export const rdsEndpoint = db.endpoint;
   export const vpcId = vpc.id;
   export const dbSubnetGroupName = dbSubnetGroup.name;
@@ -150,15 +150,4 @@ const db = new aws.rds.Instance("my-db", {
   //export const dbProvisioningMessage = provision;
 
 
-// const appLabels = { app: "nginx" };
-// const deployment = new k8s.apps.v1.Deployment("nginx", {
-//     spec: {
-//         selector: { matchLabels: appLabels },
-//         replicas: 1,
-//         template: {
-//             metadata: { labels: appLabels },
-//             spec: { containers: [{ name: "nginx", image: "nginx" }] }
-//         }
-//     }
-// });
-// export const name = deployment.metadata.name;
+
