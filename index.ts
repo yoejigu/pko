@@ -67,7 +67,7 @@ const vpc = new aws.ec2.Vpc("custom-vpc", {
       protocol: "tcp",
       fromPort: 5432,
       toPort: 5432,
-      cidrBlocks: ["108.48.101.90/32"], // ⚠️ Restrict this in production
+      cidrBlocks: ["108.48.101.90/32", "35.169.206.220/32"], // ⚠️ Restrict this in production
     }],
     egress: [{
       protocol: "-1",
