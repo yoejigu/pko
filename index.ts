@@ -117,7 +117,7 @@ const db = new aws.rds.Instance("my-db", {
   });
   
   //🧠 Connect to RDS and initialize schema
-  const provision = pulumi
+  /*const provision = pulumi
     .all([db.address, db.port, dbPassword])
     .apply(async ([address, port, password]) => {
       const client = new Client({
@@ -141,13 +141,13 @@ const db = new aws.rds.Instance("my-db", {
   
       return pulumi.secret(`Logical DB '${newDb}' created at ${address}`);
     });
-  
+  */
   // 🔎 Exports
   export const rdsEndpoint = db.endpoint;
   export const vpcId = vpc.id;
   export const dbSubnetGroupName = dbSubnetGroup.name;
   export const credentialsSecretArn = secret.arn;
-  export const dbProvisioningMessage = provision;
+  //export const dbProvisioningMessage = provision;
 
 
 // const appLabels = { app: "nginx" };
