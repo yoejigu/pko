@@ -1,0 +1,15 @@
+{
+    "name": "pko",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^18",
+        "@types/pg": "^8.15.1",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^6.80.0",
+        "@pulumi/kubernetes": "^4.0.0",
+        "@pulumi/pulumi": "^3.113.0",
+        "pg": "^8.16.0"
+    }
+}
