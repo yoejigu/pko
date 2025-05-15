@@ -4,8 +4,6 @@ runtime:
   name: nodejs
   options:
     packagemanager: npm
-environments:
-  - yte-pko/rds-config
 config:
   pulumi:tags:
     value:
